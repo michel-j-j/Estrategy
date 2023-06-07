@@ -1,0 +1,75 @@
+package model;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Envio correo = new ColectivoSur("CapitalFederal", 2);
+		System.out.println(correo.calcularEnvio());
+		String temp;
+        String origen = "Nueva York";
+        String destino = "Los Ángeles";
+
+        // Codifica los nombres de las regiones para incluirlos en la URL de la solicitud
+        String apiKey = "5b3ce3597851110001cf6248cd203b1861b64e5587f38f91c71aeab5";
+        String encodedOrigen = URLEncoder.encode(origen, StandardCharsets.UTF_8);
+        String encodedDestino = URLEncoder.encode(destino, StandardCharsets.UTF_8);
+
+		try {
+			// Crea la URL de la API que deseas consumir
+			URL url = new URL(
+					"https://api.openrouteservice.org/v2/directions/driving-car?"
+					+ "api_key="+apiKey+"&"
+					+ "start="+encodedOrigen+"&"
+					+ "end="+encodedDestino+"");
+
+			// Abre la conexión HTTP
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+			// Configura el método de solicitud (GET, POST, etc.)
+			connection.setRequestMethod("GET");
+
+			// Realiza la solicitud y obtiene la respuesta
+			int responseCode = connection.getResponseCode();
+
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				// Lee la respuesta de la API
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				String line;
+				StringBuilder response = new StringBuilder();
+
+				while ((line = reader.readLine()) != null) {
+					response.append(line);
+				}
+				reader.close();
+				System.out.println(response.toString());
+
+				String jsonString = response.toString();
+				Gson gson = new GsonBuilder().create();
+				var jsonObject = gson.fromJson(jsonString, JsonObject.class);
+				temp = jsonObject.getAsJsonObject("main").getAsJsonObject().get("temp").toString();
+	
+				// Procesa la respuesta
+				System.out.println(response.toString());
+			} else {
+				System.out.println("Error en la respuesta: " + responseCode);
+			}
+
+			// Cierra la conexión
+			connection.disconnect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

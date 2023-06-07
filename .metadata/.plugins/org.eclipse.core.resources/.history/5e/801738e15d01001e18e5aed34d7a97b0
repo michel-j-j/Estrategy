@@ -1,0 +1,30 @@
+package model;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class Testing {
+
+	@Test
+	public void colectivoPrecioXKG()
+	{
+		Envio colectivoMenos5KG = new ColectivoSur("CapitalFederal", 2);
+		Envio colectivoMasDe5KG = new ColectivoSur("CapitalFederal", 10);
+		Envio colectivoMasDe30KG = new ColectivoSur("CapitalFederal", 40);
+		Assert.assertEquals(1000, (int)colectivoMenos5KG.calcularEnvio());
+		Assert.assertEquals(1500, (int)colectivoMasDe5KG.calcularEnvio());
+		Assert.assertEquals(3000, (int)colectivoMasDe30KG.calcularEnvio());
+		
+	}
+	@Test
+	public void colectivoPrecioXImpuesto()
+	{
+		Envio colectivoMenos5KG = new ColectivoSur("CapitalFederal", 2);
+		Envio colectivoMasDe5KG = new ColectivoSur("CapitalFederal", 10);
+		Envio colectivoMasDe30KG = new ColectivoSur("CapitalFederal", 40);
+		Assert.assertEquals(1000, (int)colectivoMenos5KG.calcularEnvio());
+		Assert.assertEquals(1500, (int)colectivoMasDe5KG.calcularEnvio());
+		Assert.assertEquals(3000, (int)colectivoMasDe30KG.calcularEnvio());
+		
+	}
+}

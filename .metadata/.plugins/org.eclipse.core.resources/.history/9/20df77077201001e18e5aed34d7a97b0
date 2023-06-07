@@ -1,0 +1,11 @@
+package model;
+
+public class PersonaFechaLarga implements Persona{
+
+	@Override
+	public String fechaNacimiento() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

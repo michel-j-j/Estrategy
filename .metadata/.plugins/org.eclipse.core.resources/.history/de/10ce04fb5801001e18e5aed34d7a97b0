@@ -1,0 +1,13 @@
+package model;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Envio colectivo = new ColectivoSur("CapitalFederal", 2);
+		System.out.println(colectivo.calcularEnvio());
+		
+		Envio correo = new CorreoArgentino("CapitalFederasl");
+		System.out.println(correo.calcularEnvio());
+	}
+
+}

@@ -1,0 +1,11 @@
+package model;
+
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpRequest;
+import java.nio.charset.StandardCharsets;
+
+public class DistanceCalculator {
+	
+	
+}

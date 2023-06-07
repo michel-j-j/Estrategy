@@ -1,0 +1,47 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class Testing {
+
+	@Test
+	public void colectivoPrecioXKG() {
+		Producto producto1 = new Producto(10, 2);
+		Producto producto2 = new Producto(10, 3);
+		Producto producto3 = new Producto(10, 1);
+		Integer pesoTotal = 0;
+		List<Producto> list = new ArrayList<Producto>();
+
+		for (Producto cant : list) {
+			pesoTotal = cant.obtenerPeso();
+		}
+		Envio colectivoMenos5KG = new ColectivoSur("CapitalFederal", pesoTotal);
+
+		list.add(producto1);
+		list.add(producto2);
+		list.add(producto3);
+
+		Carrito carrito = new Carrito(list, colectivoMenos5KG);
+//		Envio colectivoMasDe5KG = new ColectivoSur("CapitalFederal", 10);
+//		Envio colectivoMasDe30KG = new ColectivoSur("CapitalFederal", 40);
+
+		System.out.println(carrito.calcularPrecio());
+		Assert.assertEquals(1030, (int) carrito.calcularPrecio());
+//		Assert.assertEquals(1500, (int) colectivoMasDe5KG.calcularEnvio());
+//		Assert.assertEquals(3000, (int) colectivoMasDe30KG.calcularEnvio());
+
+	}
+
+	@Test
+	public void correoPrecioXKM() {
+		Envio correoLocal = new CorreoArgentino("CapitalFederal");
+		Envio correoExteriorCapital = new CorreoArgentino("Viedma");
+
+		Assert.assertEquals(1000, (int) correoLocal.calcularEnvio());
+		Assert.assertEquals(1300, (int) correoExteriorCapital.calcularEnvio());
+	}
+}

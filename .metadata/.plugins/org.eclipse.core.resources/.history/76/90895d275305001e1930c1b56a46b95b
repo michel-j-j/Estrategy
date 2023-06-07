@@ -1,0 +1,18 @@
+package model;
+
+import java.time.LocalDate;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Persona fechaCorta = new PersonaFechaCorta(LocalDate.now());
+		System.out.println(fechaCorta.fechaNacimiento());	
+		
+		fechaCorta = new PersonaFechaLarga(LocalDate.now());
+		
+		System.out.println(fechaCorta.fechaNacimiento());
+		// Persona fechaLarga = new PersonaFechaLarga(LocalDate.now());
+		// System.out.println(fechaLarga.fechaNacimiento());
+	}
+
+}

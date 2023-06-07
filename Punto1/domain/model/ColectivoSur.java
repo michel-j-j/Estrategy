@@ -1,0 +1,52 @@
+package model;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+
+public class ColectivoSur implements Envio {
+	private String destino;
+	private Integer peso;
+
+	private ColectivoEnum destinoOficial;
+	private static Map<Integer, Integer> pesoValor = new LinkedHashMap<Integer, Integer>();
+	{
+		{ // Valor x Peso del producto.
+			pesoValor.put(30, 2000);
+			pesoValor.put(5, 500);
+		}
+	};
+
+	public ColectivoSur(String destino, Integer peso) {
+		this.destino = Objects.requireNonNull(destino);
+		this.peso = Objects.requireNonNull(peso);
+
+		if (!destinoValido())
+			throw new RuntimeException("Destino invalido.");
+	}
+
+	public void agregarPeso(Integer peso) {
+		this.peso = peso;
+	}
+
+	@Override
+	public Integer calcularEnvio() {
+		return destinoOficial.precio() + calcularPeso();
+	}
+
+	public Integer calcularPeso() {
+		return pesoValor.entrySet().stream().filter(val -> peso > val.getKey()).map(Map.Entry::getValue).findFirst()
+				.orElse(0);
+	}
+
+	public Boolean destinoValido() {
+		for (ColectivoEnum des : ColectivoEnum.values()) {
+			if (des.name().equals(destino)) {
+				destinoOficial = des;
+				return true;
+			}
+		}
+		destinoOficial = ColectivoEnum.Default;
+		return false;
+	}
+}

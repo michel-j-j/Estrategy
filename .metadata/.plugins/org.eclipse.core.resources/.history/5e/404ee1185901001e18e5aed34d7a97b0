@@ -1,0 +1,37 @@
+package model;
+
+import java.util.Objects;
+
+public class CorreoArgentino implements Envio {
+	private DistanceCalculator calculador;
+	private String destino;
+	
+	private static CorreoEnum destinoOficial;
+	private static final Integer precioKM = 5;
+	private static final String destinoOrigen = "CapitalFederal";
+
+	public CorreoArgentino(String destino) {
+		this.destino = Objects.requireNonNull(destino);
+		if(!destinoValido())
+			throw new RuntimeException("Destino origen invalido.");
+		this.calculador = new DistanceCalculator(destinoOrigen);
+	}
+
+	@Override
+	public Integer calcularEnvio() {
+		Integer total = precioKM * calculador.calcularDistancia(destino);
+		total += destinoOficial.precio();
+		return total;
+	}
+
+	public Boolean destinoValido() {
+		for (CorreoEnum des : CorreoEnum.values()) {
+			if (des.name().equals(destinoOrigen)) {
+				destinoOficial = des;
+				return true;
+			}
+		}
+		destinoOficial = CorreoEnum.Default;
+		return false;
+	}
+}

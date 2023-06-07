@@ -1,0 +1,18 @@
+package model;
+
+import java.util.Objects;
+
+public class DistanceCalculator {
+	private String destino;
+	
+	public DistanceCalculator(String destino)
+	{
+		this.destino = Objects.requireNonNull(destino);
+		if(destinoValido())
+			throw new RuntimeException("Destino invalido.");
+	}
+	private Boolean destinoValido()
+	{
+		return true;
+	}
+}

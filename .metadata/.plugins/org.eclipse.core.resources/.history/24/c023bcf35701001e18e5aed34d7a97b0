@@ -1,0 +1,34 @@
+package model;
+
+import java.util.Objects;
+
+public class CorreoArgentino implements Envio {
+	private String destino;
+	private Integer km;
+	
+	
+	private static CorreoEnum destinoOficial;
+	private static final Integer precioKM = 5;
+	private static final String destinoOrigen = "CapitalFederal";
+
+	public CorreoArgentino(String destino, Integer km) {
+		this.destino = Objects.requireNonNull(destino);
+		this.km = Objects.requireNonNull(km);
+	}
+
+	@Override
+	public Integer calcularEnvio() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Boolean destinoValido() {
+		for (CorreoEnum des : CorreoEnum.values()) {
+			if (des.name().equals(destino)) {
+				destinoOficial = des;
+				return true;
+			}
+		}
+		return false;
+	}
+}

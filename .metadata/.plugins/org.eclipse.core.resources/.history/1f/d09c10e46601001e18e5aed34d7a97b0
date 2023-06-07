@@ -1,0 +1,25 @@
+package model;
+
+import java.util.Objects;
+
+public class PrecioDestino {
+	private Integer precio;
+	private String destino;
+	
+	public PrecioDestino(Integer precio, String destino)
+	{
+		this.precio = Objects.requireNonNull(precio);
+		this.destino = Objects.requireNonNull(destino);
+
+	}
+	public Boolean equals(String destino)
+	{
+		return this.destino.equals(destino);
+		
+	}
+	public Integer ObtenerPrecio()
+	{
+		return this.precio;
+	}
+	
+}

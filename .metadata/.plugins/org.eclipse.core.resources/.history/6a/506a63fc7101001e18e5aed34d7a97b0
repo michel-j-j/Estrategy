@@ -1,0 +1,35 @@
+package model;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
+public class PersonaFechaCorta implements Persona{
+	private LocalDate fecha;
+	private static final String FORMATO_CORTO = "";
+	
+	public PersonaFechaCorta(LocalDate fecha)
+	{
+		this.fecha = Objects.requireNonNull(fecha);
+	}
+	@Override
+	public String fechaNacimiento() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private String formatearFecha()
+	{
+        // Obtén la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+
+        // Crea un formateador de fecha personalizado
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Formatea la fecha utilizando el formateador
+        String fechaFormateada = fechaActual.format(formateador);
+
+        // Imprime la fecha formateada
+        System.out.println("Fecha formateada: " + fechaFormateada);
+	}
+
+}

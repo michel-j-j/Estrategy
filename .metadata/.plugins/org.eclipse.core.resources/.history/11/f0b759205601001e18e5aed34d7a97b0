@@ -1,0 +1,26 @@
+package model;
+
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpRequest;
+import java.nio.charset.StandardCharsets;
+
+public class DistanceCalculator {
+	public static void main(String[] args) {
+		// Define las coordenadas de origen y destino
+		double origenLat = 40.712776; // Nueva York, EE.UU.
+		double origenLng = -74.005974;
+		double destinoLat = 34.052235; // Los Ángeles, EE.UU.
+		double destinoLng = -118.243683;
+
+		// Codifica las coordenadas para incluirlas en la URL de la solicitud
+		String origen = URLEncoder.encode(origenLat + "," + origenLng, StandardCharsets.UTF_8);
+		String destino = URLEncoder.encode(destinoLat + "," + destinoLng, StandardCharsets.UTF_8);
+
+		// Construye la URL de la solicitud
+		String url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248cd203b1861b64e5587f38f91c71aeab5&start="
+				+ origen + "&end=" + destino;
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
+		System.out.println(request);
+	}
+}
